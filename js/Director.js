@@ -33,16 +33,16 @@ export class Director {
 
   // 判断小鸟是否撞击
   static isStrike(bird, pencil) {
-    let s = false;
+    let flag = true;
     if (
       bird.top > pencil.bottom ||
       bird.bottom < pencil.top ||
       bird.right < pencil.left ||
-      bird.left > pencil.width
+      bird.left > pencil.right
     ) {
-      s = true;
+      flag = false;
     }
-    return !s;
+    return flag;
   }
 
   // 判断小鸟是否撞击地板和铅笔
@@ -74,7 +74,6 @@ export class Director {
         left: pencil.x,
         right: pencil.x + pencil.width
       };
-      console.log({...pencilBorder})
 
       if (Director.isStrike(birdsBorder, pencilBorder)) {
         console.log("撞到铅笔了");
@@ -82,8 +81,8 @@ export class Director {
         return;
       }
     }
+
     // 加分逻辑
-    console.log("坐标位置", birds.birdsX[0], pencils[0].x + pencils[0].width);
     if (birds.birdsX[0] > pencils[0].x + pencils[0].width && score.isScore) {
       score.isScore = false;
       score.scoreNumber++;
@@ -100,12 +99,14 @@ export class Director {
       return;
     }
 
+    this.dataStore.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight); // 清空画布
     this.dataStore.get("background").draw();
 
     const pencils = this.dataStore.get("pencils");
     if (pencils[0].x + pencils[0].width <= 0 && pencils.length === 4) {
       pencils.shift();
       pencils.shift();
+      this.dataStore.get("score").isScore = true; // 当铅笔销毁的时候重新启用加分标志位
     }
     if (
       pencils[0].x <= (window.innerWidth - pencils[0].width) / 2 &&
