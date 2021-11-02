@@ -17,8 +17,8 @@ export class Director {
   }
 
   createPencil() {
-    const minTop = window.innerHeight / 8;
-    const maxTop = window.innerHeight / 2;
+    const minTop = GameGlobal.height / 8;
+    const maxTop = GameGlobal.height / 2;
     const top = minTop + Math.random() * (maxTop - minTop);
     this.dataStore.get("pencils").push(new UpPencil(top));
     this.dataStore.get("pencils").push(new DownPencil(top));
@@ -92,14 +92,13 @@ export class Director {
   run() {
     this.check();
     if (this.isGameOver) {
-      console.log("游戏结束====>>>>");
       this.dataStore.get("startButton").draw();
       cancelAnimationFrame(this.dataStore.get("timer"));
       this.dataStore.destory();
       return;
     }
 
-    this.dataStore.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight); // 清空画布
+    this.dataStore.ctx.clearRect(0, 0, GameGlobal.width, GameGlobal.height); // 清空画布
     this.dataStore.get("background").draw();
 
     const pencils = this.dataStore.get("pencils");
@@ -109,12 +108,12 @@ export class Director {
       this.dataStore.get("score").isScore = true; // 当铅笔销毁的时候重新启用加分标志位
     }
     if (
-      pencils[0].x <= (window.innerWidth - pencils[0].width) / 2 &&
+      pencils[0].x <= (GameGlobal.width - pencils[0].width) / 2 &&
       pencils.length === 2
     ) {
       this.createPencil();
     }
-    this.dataStore.get("pencils").forEach((item) => {
+    this.dataStore.get("pencils").forEach(item => {
       item.draw();
     });
 

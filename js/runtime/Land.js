@@ -12,7 +12,7 @@ export class Land extends Sprite {
       image.width,
       image.height,
       0,
-      window.innerHeight - image.height,
+      GameGlobal.height - image.height,
       image.width,
       image.height
     );
@@ -22,7 +22,7 @@ export class Land extends Sprite {
 
   draw() {
     this.LandX += this.LandSpeed;
-    if (this.LandX > this.image.width - window.innerWidth) {
+    if (this.LandX > this.image.width - GameGlobal.width) {
       this.LandX = 0;
     }
     super.draw(

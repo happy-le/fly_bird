@@ -12,8 +12,8 @@ export class BackGround extends Sprite {
       image.height,
       0,
       0,
-      window.innerWidth,
-      window.innerHeight
+      GameGlobal.width,
+      GameGlobal.height
     );
   }
 }

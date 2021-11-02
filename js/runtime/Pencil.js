@@ -1,7 +1,6 @@
 // 铅笔的基类
 
 import { Sprite } from "../base/Sprite.js";
-import { Director } from "../Director.js";
 
 export class Pencil extends Sprite {
   constructor(image, top) {
@@ -11,16 +10,17 @@ export class Pencil extends Sprite {
       0,
       image.width,
       image.height,
-      window.innerWidth, // 刚好在右侧看不到的位置
+      GameGlobal.width, // 刚好在右侧看不到的位置
       0,
       image.width,
       image.height
     );
     this.top = top
+    this.moveSpeed = 2
   }
 
   draw() {
-    this.x -= Director.getInstance().moveSpeed;
+    this.x -= this.moveSpeed;
     super.draw(
       this.image,
       0,

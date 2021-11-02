@@ -9,7 +9,10 @@ import { Land } from "./js/runtime/Land.js";
 
 export class Main {
   constructor() {
-    this.canvas = document.getElementById("game_canvas");
+    this.canvas = wx.createCanvas();
+    GameGlobal.width = this.canvas.width;
+    GameGlobal.height = this.canvas.height;
+
     this.ctx = this.canvas.getContext("2d");
     this.dataStore = DataStore.getInstance();
     this.director = Director.getInstance();
@@ -46,7 +49,7 @@ export class Main {
     this.canvas.addEventListener("touchstart", (e) => {
       e.preventDefault();
       if (this.director.isGameOver) {
-        console.log("游戏重新开始");
+        console.log("重新开始");
         this.init();
       } else {
         this.director.birdsEvent();

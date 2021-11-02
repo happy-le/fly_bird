@@ -13,8 +13,8 @@ export class Score {
     this.ctx.fillStyle = "#ffcbeb";
     this.ctx.fillText(
       this.scoreNumber,
-      window.innerWidth / 2,
-      window.innerHeight / 18,
+      GameGlobal.width / 2,
+      GameGlobal.height / 18,
       1000
     );
   }

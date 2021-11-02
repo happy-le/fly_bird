@@ -22,9 +22,9 @@ export class Birds extends Sprite {
     this.clippingWidth = [34, 34, 34];
     this.clippingHeight = [24, 24, 24];
 
-    this.birdX = window.innerWidth / 4;
+    this.birdX = GameGlobal.width / 4;
     this.birdsX = [this.birdX, this.birdX, this.birdX];
-    this.birdY = window.innerHeight / 2;
+    this.birdY = GameGlobal.height / 2;
     this.birdsY = [this.birdY, this.birdY, this.birdY];
 
     this.birdWidth = 34;
